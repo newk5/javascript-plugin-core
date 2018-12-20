@@ -1,5 +1,6 @@
 package com.github.newk5.vcmp.javascript.plugin.output;
 
+import org.pmw.tinylog.Logger;
 
 public class Console {
 
@@ -30,8 +31,10 @@ public class Console {
     public synchronized void log(Object msg) {
         if (msg == null) {
             printer.print("null");
+            Logger.info(msg);
             return;
         }
+        Logger.info(msg.toString());
         printer.print(msg.toString());
     }
 
