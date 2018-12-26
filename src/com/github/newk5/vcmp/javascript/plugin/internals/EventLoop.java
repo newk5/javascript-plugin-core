@@ -25,9 +25,11 @@ public class EventLoop {
                 AsyncResult result = it.next();
                 it.remove();
                 V8Array args = result.build();
-                result.getCallback().call(null, args);
-                if (!result.isMaintainCallback()) {
-                    result.getCallback().release();
+                if (result.getCallback() != null) {
+                    result.getCallback().call(null, args);
+                    if (!result.isMaintainCallback()) {
+                        result.getCallback().release();
+                    }
                 }
 
             } catch (Exception e) {
